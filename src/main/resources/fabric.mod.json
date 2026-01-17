@@ -1,41 +1,46 @@
 {
 	"schemaVersion": 1,
-	"id": "examplemod",
+	"id": "aetheredge",
 	"version": "${version}",
-	"name": "Example Mod",
-	"description": "This mod aims to help new BTA modders.",
+
+	"name": "Aether's Edge",
+	"description": "Expansion mod for Better With Aether.",
+
 	"authors": [
-		"Turnip Labs"
+		"LukeisStuff"
 	],
+
 	"contact": {
 		"homepage": "",
 		"sources": ""
 	},
+
 	"icon": "icon.png",
 	"license": "CC0-1.0",
 	"environment": "*",
+
 	"entrypoints": {
-		"main": [
-			"turniplabs.examplemod.ExampleMod"
-		],
-		"beforeGameStart": [
-			"turniplabs.examplemod.ExampleMod"
-		],
-		"afterGameStart": [
-			"turniplabs.examplemod.ExampleMod"
-		],
-		"recipesReady": [
-			"turniplabs.examplemod.ExampleMod"
-		]
+		"main": ["teamport.aethersedge.AetherEdgeMod"],
+		"beforeGameStart": ["teamport.aethersedge.AetherEdgeMod"],
+		"afterGameStart": ["teamport.aethersedge.AetherEdgeMod"],
+		"client": ["teamport.aethersedge.AetherEdgeClient"],
+		"beforeClientStart": ["teamport.aethersedge.AetherEdgeClient"],
+		"afterClientStart": ["teamport.aethersedge.AetherEdgeClient"],
+		"initModels": ["teamport.aethersedge.AetherEdgeModels"],
+		"recipesReady": ["teamport.aethersedge.AetherEdgeRecipes"],
+		"server": ["teamport.aethersedge.AetherEdgeServer"]
 	},
+
 	"mixins": [
-		"examplemod.mixins.json"
+		"aethersedge.mixins.json"
 	],
+
 	"depends": {
 		"fabricloader": ">=${fabricloader}",
 		"halplibe": ">=${halplibe}",
 		"minecraft": "*",
-		"java": ">=${java}"
+		"java": ">=${java}",
+		"aether": ">=${aether}"
 	},
 	"suggests": {
 		"modmenu": ">=${modmenu}"

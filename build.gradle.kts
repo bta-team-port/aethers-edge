@@ -17,27 +17,43 @@ loom {
     customMinecraftMetadata.set("https://downloads.betterthanadventure.net/bta-client/${libs.versions.btaChannel.get()}/v${libs.versions.bta.get()}/manifest.json")
 }
 repositories {
-    mavenCentral()
+	mavenCentral()
 	maven("https://jitpack.io")
-    maven("https://maven.fabricmc.net/") { name = "Fabric" }
-    maven("https://maven.thesignalumproject.net/infrastructure") { name = "SignalumMavenInfrastructure" }
-    maven("https://maven.thesignalumproject.net/releases") { name = "SignalumMavenReleases" }
-    ivy("https://github.com/Better-than-Adventure") {
-        patternLayout { artifact("[organisation]/releases/download/v[revision]/[module].jar") }
-        metadataSources { artifact() }
-    }
-    ivy("https://downloads.betterthanadventure.net/bta-client/${libs.versions.btaChannel.get()}/") {
-        patternLayout { artifact("/v[revision]/client.jar") }
-        metadataSources { artifact() }
-    }
-    ivy("https://downloads.betterthanadventure.net/bta-server/${libs.versions.btaChannel.get()}/") {
-        patternLayout { artifact("/v[revision]/server.jar") }
-        metadataSources { artifact() }
-    }
-    ivy("https://piston-data.mojang.com") {
-        patternLayout { artifact("v1/[organisation]/[revision]/[module].jar") }
-        metadataSources { artifact() }
-    }
+	maven("https://maven.fabricmc.net/") { name = "Fabric" }
+	maven("https://maven.thesignalumproject.net/infrastructure") { name = "SignalumMavenInfrastructure" }
+	maven("https://maven.thesignalumproject.net/releases") { name = "SignalumMavenReleases" }
+	ivy("https://github.com/Better-than-Adventure") {
+		patternLayout { artifact("[organisation]/releases/download/v[revision]/[module].jar") }
+		metadataSources { artifact() }
+	}
+	ivy("https://downloads.betterthanadventure.net/bta-client/${libs.versions.btaChannel.get()}/") {
+		patternLayout { artifact("/v[revision]/client.jar") }
+		metadataSources { artifact() }
+	}
+	ivy("https://downloads.betterthanadventure.net/bta-server/${libs.versions.btaChannel.get()}/") {
+		patternLayout { artifact("/v[revision]/server.jar") }
+		metadataSources { artifact() }
+	}
+	ivy("https://piston-data.mojang.com") {
+		patternLayout { artifact("v1/[organisation]/[revision]/[module].jar") }
+		metadataSources { artifact() }
+	}
+	ivy("https://github.com/") {
+		patternLayout { artifact("v1/[organisation]/[revision]/[module].jar") }
+		metadataSources { artifact() }
+	}
+	ivy ("https://github.com/"){
+		patternLayout { artifact("[organization]/[module]/releases/download/[revision]/[module]-[revision].jar")}
+		metadataSources { artifact() }
+	}
+	repositories {
+		exclusiveContent {
+			forRepository {
+				maven("https://api.modrinth.com/maven") { name = "Modrinth" }
+			}
+			filter { includeGroup("maven.modrinth") }
+		}
+	}
 }
 lwjgl {
 	version = libs.versions.lwjgl
@@ -48,10 +64,18 @@ dependencies {
 
 	runtimeOnly(libs.clientJar)
 	implementation(libs.loader)
-	// If you do not need Halplibe you can comment out or delete this line.
 	implementation(libs.halplibe)
 	implementation(libs.modMenu)
 	implementation(libs.legacyLwjgl)
+
+	compileOnly(libs.btwaila)
+	compileOnly(libs.commandly)
+
+	implementation(libs.dragonfly)
+	implementation(libs.catalyst.core)
+	implementation(libs.catalyst.effects)
+	implementation(libs.uselessNumerical.get().let { "${it.group}:${it.name}:${it.version}-${libs.versions.bta.get()}" })
+	implementation(libs.aether)
 
 	implementation(libs.slf4jApi)
 	implementation(libs.guava)
@@ -118,7 +142,8 @@ tasks {
 			"fabricloader" to libs.versions.loader.get(),
 			"halplibe" to libs.versions.halplibe.get(),
 			"java" to libs.versions.java.get(),
-			"modmenu" to libs.versions.modMenu.get()
+			"modmenu" to libs.versions.modMenu.get(),
+			"aether" to libs.versions.aether.get()
 		)
 		inputs.properties(resourceMap)
 		filesMatching("fabric.mod.json") { expand(resourceMap) }
