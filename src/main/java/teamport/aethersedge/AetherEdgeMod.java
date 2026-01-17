@@ -3,6 +3,7 @@ package teamport.aethersedge;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import teamport.aethersedge.item.AetherEdgeItems;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 
 public class AetherEdgeMod implements ModInitializer, GameStartEntrypoint {
@@ -16,6 +17,7 @@ public class AetherEdgeMod implements ModInitializer, GameStartEntrypoint {
 
 	@Override
 	public void beforeGameStart() {
+		AetherEdgeItems.init();
 	}
 
 	@Override
