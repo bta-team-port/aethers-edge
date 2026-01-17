@@ -1,11 +1,11 @@
 {
 	"schemaVersion": 1,
-	"id": "examplemod",
+	"id": "aetheredge",
 	"version": "${version}",
-	"name": "Example Mod",
-	"description": "This mod aims to help new BTA modders.",
+	"name": "Aether's Edge",
+	"description": "Expansion mod for Better With Aether.",
 	"authors": [
-		"Turnip Labs"
+		"LukeisStuff"
 	],
 	"contact": {
 		"homepage": "",
@@ -16,26 +16,27 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"turniplabs.examplemod.ExampleMod"
+			"teamport.aethersedge.AetherEdgeMod"
 		],
 		"beforeGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"teamport.aethersedge.AetherEdgeMod"
 		],
 		"afterGameStart": [
-			"turniplabs.examplemod.ExampleMod"
+			"teamport.aethersedge.AetherEdgeMod"
 		],
 		"recipesReady": [
-			"turniplabs.examplemod.ExampleMod"
+			"teamport.aethersedge.AetherEdgeMod"
 		]
 	},
 	"mixins": [
-		"examplemod.mixins.json"
+		"aethersedge.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=${fabricloader}",
 		"halplibe": ">=${halplibe}",
 		"minecraft": "*",
-		"java": ">=${java}"
+		"java": ">=${java}",
+		"aether": ">=${aether}"
 	},
 	"suggests": {
 		"modmenu": ">=${modmenu}"
