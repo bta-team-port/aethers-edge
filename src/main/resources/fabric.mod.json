@@ -2,35 +2,39 @@
 	"schemaVersion": 1,
 	"id": "aetheredge",
 	"version": "${version}",
+
 	"name": "Aether's Edge",
 	"description": "Expansion mod for Better With Aether.",
+
 	"authors": [
 		"LukeisStuff"
 	],
+
 	"contact": {
 		"homepage": "",
 		"sources": ""
 	},
+
 	"icon": "icon.png",
 	"license": "CC0-1.0",
 	"environment": "*",
+
 	"entrypoints": {
-		"main": [
-			"teamport.aethersedge.AetherEdgeMod"
-		],
-		"beforeGameStart": [
-			"teamport.aethersedge.AetherEdgeMod"
-		],
-		"afterGameStart": [
-			"teamport.aethersedge.AetherEdgeMod"
-		],
-		"recipesReady": [
-			"teamport.aethersedge.AetherEdgeMod"
-		]
+		"main": ["teamport.aethersedge.AetherEdgeMod"],
+		"beforeGameStart": ["teamport.aethersedge.AetherEdgeMod"],
+		"afterGameStart": ["teamport.aethersedge.AetherEdgeMod"],
+		"client": ["teamport.aethersedge.AetherEdgeClient"],
+		"beforeClientStart": ["teamport.aethersedge.AetherEdgeClient"],
+		"afterClientStart": ["teamport.aethersedge.AetherEdgeClient"],
+		"initModels": ["teamport.aethersedge.AetherEdgeModels"],
+		"recipesReady": ["teamport.aethersedge.AetherEdgeRecipes"],
+		"server": ["teamport.aethersedge.AetherEdgeServer"]
 	},
+
 	"mixins": [
 		"aethersedge.mixins.json"
 	],
+
 	"depends": {
 		"fabricloader": ">=${fabricloader}",
 		"halplibe": ">=${halplibe}",
