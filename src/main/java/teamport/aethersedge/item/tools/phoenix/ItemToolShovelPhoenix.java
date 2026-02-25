@@ -1,7 +1,8 @@
-package teamport.aethersedge.item;
+package teamport.aethersedge.item.tools.phoenix;
 
 import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
+import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
@@ -9,14 +10,15 @@ import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.util.helper.Side;
 import net.minecraft.core.world.World;
+import teamport.aether.block.AetherBlockTags;
 import teamport.aether.helper.ParticleMaker;
 import teamport.aether.item.AetherHasCustomDamageType;
 import teamport.aether.item.AetherItems;
-import teamport.aether.item.item_tool.ItemToolPickaxeAether;
+import teamport.aether.item.item_tool.ItemToolShovelAether;
 import turniplabs.halplibe.helper.EnvironmentHelper;
 
-public class ItemToolPickaxePhoenix extends ItemToolPickaxeAether implements AetherHasCustomDamageType {
-	public ItemToolPickaxePhoenix(String name, String namespaceId, int id, ToolMaterial enumtoolmaterial) {
+public class ItemToolShovelPhoenix extends ItemToolShovelAether implements AetherHasCustomDamageType, PhoenixAdjustBlockDropped{
+	public ItemToolShovelPhoenix(String name, String namespaceId, int id, ToolMaterial enumtoolmaterial) {
 		super(name, namespaceId, id, enumtoolmaterial);
 	}
 
@@ -32,19 +34,8 @@ public class ItemToolPickaxePhoenix extends ItemToolPickaxeAether implements Aet
 	}
 
 	@Override
-	public boolean onBlockDestroyed(World world, ItemStack itemstack, int i, int x, int y, int z, Side side, Mob mob) {
-		Block<?> block = Blocks.blocksList[i];
-		if (block != null) {
-			if (block.getHardness() > 0.0F || this.isSilkTouch()) {
-				itemstack.damageItem(1, mob);
-			}
-
-			if (!EnvironmentHelper.isClientWorld()) {
-				world.dropItem(x, y, z, new ItemStack(AetherItems.AMBROSIUM, 1));
-			}
-		}
-
-		return true;
+	public float getStrVsBlock(ItemStack itemstack, Block<?> block) {
+		return !block.hasTag(AetherBlockTags.MINEABLE_BY_AETHER_SHOVEL) && !block.hasTag(BlockTags.MINEABLE_BY_SHOVEL) ? 1.0F : this.material.getEfficiency(false);
 	}
 
 	@Override

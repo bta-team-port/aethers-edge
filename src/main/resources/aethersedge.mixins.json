@@ -9,12 +9,10 @@
     "defaultRequire": 1
   },
   "mixins": [
-
+    "BlockLogicMixinChangeBreakResults"
   ],
   "client": [
-
   ],
   "server": [
-
   ]
 }

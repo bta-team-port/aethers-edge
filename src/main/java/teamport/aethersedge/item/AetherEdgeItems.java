@@ -3,6 +3,10 @@ package teamport.aethersedge.item;
 import net.minecraft.core.item.Item;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.item.tag.ItemTags;
+import teamport.aethersedge.item.tools.phoenix.ItemToolAxePhoenix;
+import teamport.aethersedge.item.tools.phoenix.ItemToolPickaxePhoenix;
+import teamport.aethersedge.item.tools.phoenix.ItemToolShovelPhoenix;
+import teamport.aethersedge.item.tools.phoenix.ItemToolSwordPhoenix;
 import turniplabs.halplibe.helper.ItemBuilder;
 
 import static teamport.aether.AetherConfig.itemID;
