@@ -1,17 +1,20 @@
-package teamport.aethersedge.item;
+package teamport.aethersedge.item.tools.phoenix;
 
+import net.minecraft.core.block.Block;
+import net.minecraft.core.block.tag.BlockTags;
 import net.minecraft.core.entity.Mob;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.material.ToolMaterial;
 import net.minecraft.core.util.helper.DamageType;
 import net.minecraft.core.world.World;
+import teamport.aether.block.AetherBlockTags;
 import teamport.aether.entity.projectile.ProjectileElementFire;
 import teamport.aether.helper.ParticleMaker;
 import teamport.aether.item.AetherHasCustomDamageType;
 import teamport.aether.item.item_tool.ItemToolSwordAether;
 
-public class ItemToolSwordPhoenix extends ItemToolSwordAether implements AetherHasCustomDamageType {
+public class ItemToolSwordPhoenix extends ItemToolSwordAether implements AetherHasCustomDamageType, PhoenixAdjustBlockDropped {
 	public ItemToolSwordPhoenix(String name, String namespaceId, int id, ToolMaterial enumtoolmaterial) {
 		super(name, namespaceId, id, enumtoolmaterial);
 	}
@@ -50,5 +53,10 @@ public class ItemToolSwordPhoenix extends ItemToolSwordAether implements AetherH
 	@Override
 	public DamageType getDamageType() {
 		return DamageType.FIRE;
+	}
+
+
+	public boolean canHarvestBlock(Mob mob, ItemStack itemStack, Block<?> block) {
+		return block.hasTag(AetherBlockTags.MINEABLE_BY_AETHER_SWORD) || block.hasTag(BlockTags.MINEABLE_BY_SWORD);
 	}
 }
