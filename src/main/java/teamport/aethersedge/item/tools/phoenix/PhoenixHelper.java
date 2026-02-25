@@ -1,9 +1,11 @@
 package teamport.aethersedge.item.tools.phoenix;
 
 import net.minecraft.core.data.registry.Registries;
+import net.minecraft.core.data.registry.recipe.entry.RecipeEntryBlastFurnace;
 import net.minecraft.core.data.registry.recipe.entry.RecipeEntryFurnace;
 import net.minecraft.core.entity.player.Player;
 import net.minecraft.core.item.ItemStack;
+import teamport.aether.AetherRecipes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +39,21 @@ public class PhoenixHelper {
 	}
 
 	private static ItemStack matchRecipe(ItemStack currentDrop) {
-		List<RecipeEntryFurnace> recipeList = Registries.RECIPES.getAllFurnaceRecipes();
-		for(RecipeEntryFurnace recipeEntryBase : recipeList) {
+		List<RecipeEntryFurnace> furnaceRecipes = Registries.RECIPES.getAllFurnaceRecipes();
+		for(RecipeEntryFurnace recipeEntryBase : furnaceRecipes) {
 			if (recipeEntryBase != null && recipeEntryBase.matches(currentDrop)) {
-				return recipeEntryBase.getOutput();
+				return recipeEntryBase.getOutput().copy();
 			}
 		}
-		return currentDrop;
+
+		List<RecipeEntryBlastFurnace> blastFurnaceRecipes = Registries.RECIPES.getAllBlastFurnaceRecipes();
+		for(RecipeEntryBlastFurnace recipeEntryBase : blastFurnaceRecipes) {
+			if (recipeEntryBase != null && recipeEntryBase.matches(currentDrop)) {
+				return recipeEntryBase.getOutput().copy();
+			}
+		}
+
+		ItemStack resultStack = AetherRecipes.ENCHANTER.findOutput(currentDrop);
+		return resultStack == null ? currentDrop: resultStack;
 	}
 }
